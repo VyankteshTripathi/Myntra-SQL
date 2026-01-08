@@ -1,0 +1,53 @@
+with DatasetA as (
+  SELECT 
+  date as Date,
+  Campaign_Name,
+  Campaign_Status,
+  null as ad_group_name,
+  Advertiser_Spend_in_Currency__in_INR_ as Spend,
+  Revenue_in_Currency__in_INR_ as Revenue,
+  Units_Sold as Orders,
+  Views,
+  Impressions,
+  Clicks,
+  "Relaxo SPA" as Brand
+  FROM 
+      `brandanalytics-414413.playground1.Relaxo_campaign_spa_test2`
+
+
+UNION ALL 
+
+SELECT
+  updated_date as Date,
+  Campaign_Name,
+  null as Campaign_Status,
+  ad_group_name,
+  ad_spend as Spend,
+  (direct_revenue+indirect_revenue) as Revenue,
+  (units_sold_direct+units_sold_indirect) as Orders,
+  Views,
+  Impressions,
+  Clicks,
+  "Consolidated Daily Report" as Brand
+FROM 
+    `myntra-428207.RELAXO_FOOTWEARS_LIMITED_self_serve.Consolidated_Daily_Report` 
+    where date(updated_date) BETWEEN PARSE_DATE("%Y%m%d",@DS_START_DATE) AND PARSE_DATE("%Y%m%d",@DS_END_DATE)
+) 
+
+SELECT 
+  Date,
+  Brand,
+  Campaign_Name,
+  ad_group_name,
+  Campaign_Status,
+  Sum(Spend) as Spend,
+  Sum(Revenue) as Rev,
+  Sum(Orders) as Orders,
+  Sum(Views) as Views,
+  Sum(Impressions) as Impressions,
+  Sum(Clicks) as Clicks,
+FROM  
+   DatasetA 
+   where date(Date) BETWEEN PARSE_DATE("%Y%m%d",@DS_START_DATE) AND PARSE_DATE("%Y%m%d",@DS_END_DATE)
+   GROUP BY 1,2,3,4,5
+  
