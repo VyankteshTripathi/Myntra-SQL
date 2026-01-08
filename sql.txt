@@ -34,7 +34,8 @@ FROM
     where date(updated_date) BETWEEN PARSE_DATE("%Y%m%d",@DS_START_DATE) AND PARSE_DATE("%Y%m%d",@DS_END_DATE)
 ) 
 
-SELECT 
+
+SELECT  
   Date,
   Brand,
   Campaign_Name,
