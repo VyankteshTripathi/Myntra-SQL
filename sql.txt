@@ -12,7 +12,7 @@ with DatasetA as (
   Clicks,
   "Relaxo SPA" as Brand
   FROM 
-      `brandanalytics-414413.playground1.Relaxo_campaign_spa_test2`
+      `playground1.Relaxo_campaign_spa_test2`
 
 
 UNION ALL 
@@ -30,7 +30,7 @@ SELECT
   Clicks,
   "Consolidated Daily Report" as Brand
 FROM 
-    `myntra-428207.RELAXO_FOOTWEARS_LIMITED_self_serve.Consolidated_Daily_Report` 
+    `RELAXO_FOOTWEARS_LIMITED_self_serve.Consolidated_Daily_Report` 
     where date(updated_date) BETWEEN PARSE_DATE("%Y%m%d",@DS_START_DATE) AND PARSE_DATE("%Y%m%d",@DS_END_DATE)
 ) 
 
