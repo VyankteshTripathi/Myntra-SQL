@@ -12,7 +12,7 @@ with DatasetA as (
   Clicks,
   "Relaxo SPA" as Brand
   FROM 
-      `playground1.Relaxo_campaign_spa_test2`
+      `Relaxo_campaign_spa_test2`
 
 
 UNION ALL 
